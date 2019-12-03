@@ -1,5 +1,6 @@
 ## learn-netty
 ### 1. 项目结构
+<pre>
 ├─netty-client
 │  ├─src
 │  │  ├─main
@@ -27,3 +28,4 @@
     │  │  └─resources
     │  └─test
     │      └─java
+</pre>
