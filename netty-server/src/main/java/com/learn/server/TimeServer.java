@@ -16,11 +16,12 @@ import org.slf4j.LoggerFactory;
  **/
 public class TimeServer {
     private static final Logger logger = LoggerFactory.getLogger(TimeServer.class);
+    private static final String host = "127.0.0.1";
+    private static final int port = 9898;
 
     public static void main(String[] args) {
-        final int port = 9898;
         Thread thread = new Thread(()->{
-            new TimeServer().bind(port);
+            new TimeServer().bind(host,port);
         });
 
         thread.setDaemon(true);
@@ -29,7 +30,7 @@ public class TimeServer {
         }
     }
 
-    public void bind(int port) {
+    public void bind(String host,int port) {
         logger.info("server running");
         /**
          * interface EventLoopGroup extends EventExecutorGroup extends ScheduledExecutorService extends ExecutorService
@@ -47,7 +48,7 @@ public class TimeServer {
                     .childHandler(new ChildChannelHandler());
 
             /**服务器启动辅助类配置完成后，调用 bind 方法绑定监听端口，调用 sync 方法同步等待绑定操作完成*/
-            ChannelFuture f = b.bind(port).sync();
+            ChannelFuture f = b.bind(host,port).sync();
 
             logger.info(Thread.currentThread().getName() + ",服务器开始监听端口，等待客户端连接.........");
             /**下面会进行阻塞，等待服务器连接关闭之后 main 方法退出，程序结束

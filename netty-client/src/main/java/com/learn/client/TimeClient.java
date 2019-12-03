@@ -19,6 +19,8 @@ import org.slf4j.LoggerFactory;
  **/
 public class TimeClient {
     private static final Logger logger = LoggerFactory.getLogger(TimeClient.class);
+    private static final String host = "127.0.0.1";
+    private static final int post = 9898;
     /**
      * 使用 3 个线程模拟三个客户端
      *
@@ -34,7 +36,7 @@ public class TimeClient {
 
         @Override
         public void run() {
-            connect("10.12.210.20", 9898);
+            connect(host, post);
         }
 
         public void connect(String host, int port) {
